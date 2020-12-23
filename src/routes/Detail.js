@@ -22,7 +22,9 @@ function mapStateToProps(state, ownProps) {
     }
   } = ownProps;
 
-  return { toDo: state.find(toDo => toDo.id === parseInt(id)) };
+  console.log(state);
+
+  return { toDo: state.reducer.find(toDo => toDo.id === parseInt(id)) };
 }
 
 export default connect(mapStateToProps, null)(Detail);

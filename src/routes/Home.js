@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import ToDo from '../components/ToDo';
-import { actionCreators } from '../store';
-import { add } from '../store';
+import { actionCreators } from '../reducers/store';
+import { add } from '../reducers/store';
 
 const Home = ({ toDos, addToDo }) => {
   const [text, setText] = useState('');
 
+  console.log(toDos.reducer);
 
   const onChange = (e) => {
     setText(e.target.value);
@@ -26,7 +27,7 @@ const Home = ({ toDos, addToDo }) => {
         <button>Add</button>
       </form>
       <ul>
-        {toDos.map(toDo => (
+        {toDos.reducer.map(toDo => (
           <ToDo {...toDo} key={toDo.id} />
         ))}
       </ul>
@@ -40,8 +41,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    addToDo: text => dispatch(actionCreators.addToDo(text)),
-    // addToDo: text => dispatch(add(text)),
+    // addToDo: text => dispatch(actionCreators.addToDo(text)),
+    addToDo: text => dispatch(add(text)),
   };
 }
 
